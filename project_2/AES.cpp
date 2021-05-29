@@ -37,12 +37,6 @@ void AlgAES::encryptAES (AlgAES enc)
     encr.SetKeyWithIV(key, key.size(), iv);
     FileSource fs(enc.filePath_in.c_str(), true, new StreamTransformationFilter(encr, new FileSink(enc.filePath_out.c_str())));
     cout << "Результат шифрования записан в файл, который находится по следующем пути:\n" << enc.filePath_out << endl;
-
-    //Шифрование в виде строки Base64
-    string base64, resultbase64;
-    FileSource fs_base64(enc.filePath_in.c_str(), true, new StreamTransformationFilter(encr, new StringSink(base64)));
-    StringSource ss_base64(base64, true, new Base64Encoder ( new StringSink(resultbase64)));
-    cout << "Зашифрованный текст в формате Base64: " << resultbase64 << endl;
 }
 
 void AlgAES::decryptAES (AlgAES dec)
